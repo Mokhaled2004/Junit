@@ -1,6 +1,7 @@
 package test;
 
 import junit.framework.TestSuite;
+import org.jfree.data.time.RegularTimePeriod;
 import org.jfree.data.time.Year;
 import org.junit.Before;
 import org.junit.Test;
@@ -100,6 +101,31 @@ public class YearTest {
 
         //Assert
         assertEquals(1899,result4);
+
+    }
+
+    @Test
+    public void testPrevious() {
+        //Valid
+        //Arrange
+        Year year1 = new Year(2004);
+
+        //Act
+        RegularTimePeriod prevYear1 = year1.previous();
+
+        //Assert
+        assertEquals(2003,((Year)prevYear1).getYear());
+        assertNotNull(prevYear1);
+
+        //Invalid
+        //Arrange
+        Year year2 = new Year(1900);
+
+        //Act
+        RegularTimePeriod prevYear2 = year2.previous();
+
+        //Assert
+        //assertNull(prevYear2);
 
     }
 
