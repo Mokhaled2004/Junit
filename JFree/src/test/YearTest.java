@@ -95,12 +95,24 @@ public class YearTest {
 
         //Invalid Year Below Range----------------------------------------------------------------
         Year bellowValidRange = new Year(1899);
-
+        //Bug found supposed to make an  outside valid range error
         //Act
         int result4 = bellowValidRange.getYear();
 
         //Assert
         assertEquals(1899,result4);
+
+        //Invalid Year Above Range----------------------------------------------------------------
+
+        Year aboveValidRange = new Year(10000);
+
+        //Act
+        int result5 = aboveValidRange.getYear();
+
+        //Assert
+        assertEquals(10000,result5);
+
+
 
     }
 
@@ -124,8 +136,8 @@ public class YearTest {
         //Act
         RegularTimePeriod prevYear2 = year2.previous();
 
-        //Assert
-        //assertNull(prevYear2);
+        //Assert // Bug error here supposed to return null but instead returned 1899
+        assertNull(prevYear2);
 
     }
 
