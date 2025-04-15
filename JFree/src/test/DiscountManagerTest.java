@@ -39,3 +39,4 @@ public class DiscountManagerTest {
 
     // test missing cases
 }
+
