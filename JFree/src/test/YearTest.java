@@ -58,6 +58,51 @@ public class YearTest {
 
     }
 
+    @Test
+    public void TestGetYear() {
+        //Valid Year LowestRange----------------------------------------------------------------
+        //Arrange
+        Year lowestValidYear = new Year(1900);
+
+        //Act
+        int result = lowestValidYear.getYear();
+
+        //Assert
+        assertEquals(1900,result);
+
+        //Valid Year InBetweenRange----------------------------------------------------------------
+        //Arrange
+        Year inBetweenRangeValidYear = new Year(2025);
+
+        //Act
+        int result2 = inBetweenRangeValidYear.getYear();
+
+        //Assert
+        assertEquals(2025,result2);
+
+
+        //Valid Year HighestRange----------------------------------------------------------------
+        //Arrange
+        Year highestValidRange = new Year(9999);
+
+        //Act
+        int result3 = highestValidRange.getYear();
+
+        //Assert
+        assertEquals(9999,result3);
+
+
+        //Invalid Year Below Range----------------------------------------------------------------
+        Year bellowValidRange = new Year(1899);
+
+        //Act
+        int result4 = bellowValidRange.getYear();
+
+        //Assert
+        assertEquals(1899,result4);
+
+    }
+
 
 
 
