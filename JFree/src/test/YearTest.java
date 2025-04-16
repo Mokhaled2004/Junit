@@ -66,6 +66,7 @@ public class YearTest {
         Year year3 = new Year(year);
     }
 
+
     //Third Constructor===============================================
     @Test
     public void testYearDateCtor() {
@@ -104,6 +105,48 @@ public class YearTest {
     }
 
     //==============================================================================================================
+
+    //getYear Method================================================================================================
+
+    @Test
+    public void testGetYearLowestValue(){
+        //Arrange
+        Year year7 = new Year(1900);
+
+        //Act
+        int actual = year7.getYear();
+
+        //Assert
+        assertEquals(1900,actual);
+    }
+
+    @Test
+    public void testGetYearInRange() {
+        //Arrange
+        Year year8 = new Year(2004);
+
+        //Act
+        int actual = year8.getYear();
+
+        //Assert
+        assertEquals(2004,actual);
+    }
+
+    @Test
+    public void testGetHighestValue() {
+        //Arrange
+        Year year9 = new Year(9999);
+
+        //Act
+        int actual = year9.getYear();
+
+        //Assert
+        assertEquals(9999,actual);
+    }
+
+    //==============================================================================================================
+    //getYear previous==============================================================================================
+
 
 
 
