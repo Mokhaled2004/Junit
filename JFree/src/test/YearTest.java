@@ -177,7 +177,30 @@ public class YearTest {
     //==============================================================================================================
     //next==========================================================================================================
 
+    @Test
+    public void testNextValid() {
+        //Arrange
+        Year year2004 = new Year(2004);
 
+        //Act
+        RegularTimePeriod nextYear2004 = year2004.next();
+
+        //Assert
+        assertEquals(2005, ((Year) nextYear2004).getYear());
+
+    }
+
+    @Test
+    public void testNextInvalid() {
+        //Arrange
+        Year year9999 = new Year(9999);
+
+        //Act
+        RegularTimePeriod nextYear9999 = year9999.next();
+
+        //Assert
+        assertNull(nextYear9999);
+    }
 
 
 
