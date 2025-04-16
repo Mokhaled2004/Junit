@@ -145,12 +145,37 @@ public class YearTest {
     }
 
     //==============================================================================================================
-    //getYear previous==============================================================================================
+    //previous======================================================================================================
+
+    @Test
+    public void testPreviousValid() {
+        //Arrange
+        Year year2004 = new Year(2004);
+
+        //Act
+        RegularTimePeriod prevYear2004 = year2004.previous();
+
+        //Assert
+        assertNotNull(prevYear2004);
+        assertEquals(2003,((Year) prevYear2004).getYear());
+    }
+
+    @Test
+    public void testPreviousInvalid() {
+        //Arrange
+        Year year1900 = new Year(1900);
+
+        //Act
+        RegularTimePeriod prevYear1900 = year1900.previous();
+
+        //Assert
+        assertNull(prevYear1900);
+
+    }
 
 
-
-
-
+    //==============================================================================================================
+    //next==========================================================================================================
 
 
 
