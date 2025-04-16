@@ -16,7 +16,7 @@ public class YearTest {
     Year year;
 
 
-
+    //==============================================================================================================
     // Default Constructor Passed
     private void arrange() {
         year = new Year();
@@ -26,8 +26,10 @@ public class YearTest {
         arrange();
         assertEquals(2025, year.getYear());
     }
+    //==============================================================================================================
 
-    //Second Constructor=================================================
+
+    //==============================================================================================================
     //IntParam Constructor
     @Test
     public void testYearIntCtor() {
@@ -41,7 +43,7 @@ public class YearTest {
         assertEquals(year,year1.getYear());
     }
 
-   //Passed but this is wrong constructor suppose to not create years out of range
+
    @Test
    public void testYearIntCtorBellowRange() {
        // Arrange
@@ -57,7 +59,6 @@ public class YearTest {
    }
 
 
-    //Passed bec Exception was thrown
     @Test(expected = IllegalArgumentException.class)
     public void testYearIntCtorAboveRange() {
         //Arrange
@@ -67,8 +68,8 @@ public class YearTest {
         Year year3 = new Year(year);
     }
 
-
-    //Third Constructor===============================================
+    //==============================================================================================================
+    //Third Constructor=============================================================================================
     @Test
     public void testYearDateCtor() {
         //Arrange
@@ -89,8 +90,10 @@ public class YearTest {
         //Act
         Year year5 = new Year(date);
     }
+    //==============================================================================================================
 
-    //4th Constructor ===================================
+    //==============================================================================================================
+    //4th Constructor ==============================================================================================
     @Test
     public void testYearDateZoneCtor() {
         // Arrange
@@ -104,11 +107,11 @@ public class YearTest {
         // Assert
         //assertEquals(2025, year6.getYear());
     }
-
     //==============================================================================================================
 
-    //getYear Method================================================================================================
 
+    //==============================================================================================================
+    //getYear Method================================================================================================
     @Test
     public void testGetYearLowestValue(){
         //Arrange
@@ -120,6 +123,7 @@ public class YearTest {
         //Assert
         assertEquals(1900,actual);
     }
+
 
     @Test
     public void testGetYearInRange() {
@@ -144,10 +148,11 @@ public class YearTest {
         //Assert
         assertEquals(9999,actual);
     }
+    //==============================================================================================================
+
 
     //==============================================================================================================
     //previous======================================================================================================
-
     @Test
     public void testPreviousValid() {
         //Arrange
@@ -173,11 +178,11 @@ public class YearTest {
         assertNull(prevYear1900);
 
     }
+    //==============================================================================================================
 
 
     //==============================================================================================================
     //next==========================================================================================================
-
     @Test
     public void testNextValid() {
         //Arrange
@@ -202,10 +207,11 @@ public class YearTest {
         //Assert
         assertNull(nextYear9999);
     }
+    //==============================================================================================================
+
 
     //==============================================================================================================
     //getSerialIndex=================================================================================================
-
     @Test
     public void testGetSerialIndexInRange() {
         //Arrange
@@ -241,10 +247,11 @@ public class YearTest {
         //Assert
         assertEquals(9999L, year9999Index);
     }
+    //==============================================================================================================
+
 
     //==============================================================================================================
     //getFirstMillisecond===========================================================================================
-
     @Test
     public void testGetFirstMilliSecondValid() {
         //Arrange
@@ -306,10 +313,45 @@ public class YearTest {
         // Assert
         // Exception expected
     }
+    //==============================================================================================================
+
+    //==============================================================================================================
+    //Method getLastMillisecond ====================================================================================
+    @Test
+    public void testGetLastMillisecond_NormalYear() {
+
+        // Arrange
+        Calendar calendar = Calendar.getInstance();
+        Year year = new Year(2025);
+
+        // Act
+        long lastMillisecond = year.getLastMillisecond(calendar);
+
+        calendar.set(2025, Calendar.DECEMBER, 31, 23, 59, 59);
+        calendar.set(Calendar.MILLISECOND, 999);
+        long expected = calendar.getTimeInMillis();
+
+        // Assert
+        assertEquals(expected, lastMillisecond);
+
+    }
+
+    @Test
+    public void testGetLastMillisecond_NullCalendar() {
+
+        // Arrange
+        Year year = new Year(2024);
+
+        // Act & Assert
+        assertThrows(NullPointerException.class, () -> {
+            year.getLastMillisecond(null);
+        });
+
+    }
+    //==============================================================================================================
 
     //==============================================================================================================
     //equals========================================================================================================
-
     @Test
     public void testEqualSameYear() {
         //Arrange
@@ -349,6 +391,201 @@ public class YearTest {
         //Acr-Assert
         assertFalse(year1.equals(year2));
     }
+    //==============================================================================================================
 
+    //===============================================================================================================
+    //hashcode=======================================================================================================
+    @Test
+    public void testHashCodeLowerBoundary() {
+        Year year = new Year(1900);
+        assertNotNull(year.hashCode());
+    }
+
+    @Test
+    public void testHashCodeUpperBoundary() {
+        Year year = new Year(9999);
+        assertNotNull( year.hashCode());
+    }
+
+    @Test
+    public void testHashCodeSameObject() {
+        Year year = new Year(2025);
+        assertNotNull(year.hashCode());
+        assertEquals( year.hashCode(), year.hashCode());
+    }
+
+    @Test
+    public void testHashCodeEqualObjects() {
+        Year y1 = new Year(2025);
+        Year y2 = new Year(2025);
+        assertNotNull(y1.hashCode());
+        assertNotNull(y2.hashCode());
+        assertEquals( y1.hashCode(), y2.hashCode());
+    }
+
+    @Test
+    public void testHashCodeDifferentObjects() {
+        Year y1 = new Year(2025);
+        Year y2 = new Year(1999);
+        assertNotNull(y1.hashCode());
+        assertNotNull(y2.hashCode());
+        assertNotEquals(y1.hashCode(), y2.hashCode());
+    }
+
+    @Test
+    public void testHashCodeCollision() {
+        Year year1 = new Year(2020);
+        Year year2 = new Year(2030);
+
+        // assert that they have the same hash code
+        assertEquals(year1.hashCode(), year2.hashCode());
+
+        // BUT they are NOT equal as objects
+        assertNotEquals(year1, year2);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testHashCodeOnNullObject() {
+        Year year = null;
+        year.hashCode();
+    }
+    //==============================================================================================================
+
+
+
+    //==================================================================================================================
+    //Method compareTo==================================================================================================
+    @Test
+    public void testCompareTo_LessThan() {
+
+        // Arrange
+        Year year1 = new Year(2020);
+        Year year2 = new Year(2022);
+
+        // Act
+        int result = year1.compareTo(year2);
+
+        // Assert
+        assertTrue(result < 0);
+
+    }
+
+    @Test
+    public void testCompareTo_Same() {
+
+        // Arrange
+        Year year1 = new Year(2025);
+        Year year2 = new Year(2025);
+
+        // Act
+        int result = year1.compareTo(year2);
+
+        // Assert
+        assertTrue(result == 0);
+
+    }
+
+    @Test
+    public void testCompareTo_GreaterThan() {
+
+        // Arrange
+        Year year1 = new Year(2025);
+        Year year2 = new Year(2020);
+
+        // Act
+        int result = year1.compareTo(year2);
+
+        // Assert
+        assertTrue(result > 0);
+
+    }
+
+    //it's a bug
+    @Test
+    public void testCompareTo_WhenOtherYearIsNull() {
+
+        // Arrange
+        Year year1 = new Year(2025);
+        Year year2 = null;
+
+        // Act & Assert
+        assertThrows(NullPointerException.class, () -> {
+            year1.compareTo(year2);
+        });
+
+    }
+    //==============================================================================================================
+
+    //==============================================================================================================
+    //toString======================================================================================================
+    @Test
+    public void testValidYearToString() {
+        Year year = new Year(2025);
+        assertEquals( "2025", year.toString());
+    }
+
+
+    @Test
+    public void testToStringFailsIfWrong() {
+        Year year = new Year(2025);
+        if (!year.toString().equals("2025")) {
+            fail("Year toString() did not return expected value");
+        }
+    }
+
+
+    @Test
+    public void testToStringNotNull() {
+        Year year = new Year(2025);
+        assertNotNull("toString() should not return null", year.toString());
+    }
+
+
+    @Test(expected = NullPointerException.class)
+    public void testToStringThrowsWhenYearIsNull() {
+        Year year = null;
+        year.toString();
+    }
+    //==============================================================================================================
+
+
+    //===============================================================================================================
+    //parseYear======================================================================================================
+    @Test
+    public void testParseYearEqualsExpected() {
+        Year expected = new Year(2025);
+        Year actual = Year.parseYear("2025");
+        assertEquals(expected, actual);
+    }
+
+
+    @Test
+    public void testParseYearInvalidLetters() {
+        Year year = Year.parseYear("abcd");
+        assertNull(year);
+    }
+
+    @Test
+    public void testParseYearEmptyString() {
+        Year year = Year.parseYear("");
+        assertNull(year);
+    }
+
+    @Test
+    public void testParseYear_TooShort() {
+        Year year = Year.parseYear("20");
+        assertNull(year);
+    }
+
+    @Test
+    public void testParseYear_NullInput() {
+        Year year = Year.parseYear(null);
+        assertNull(year);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testParseYearNullInput() {
+        Year.parseYear(null);
+    }
 
 }
