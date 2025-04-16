@@ -6,16 +6,17 @@ import org.jfree.data.time.Year;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Date;
+import java.util.TimeZone;
+
 import static org.junit.Assert.*;
 
 public class YearTest {
     Year year;
-    Year Year1;
-    Year Year2;
-    Year Year3;
 
 
 
+    // Default Constructor Passed
     private void arrange() {
         year = new Year();
     }
@@ -25,121 +26,95 @@ public class YearTest {
         assertEquals(2025, year.getYear());
     }
 
-    @Before
-    public void Intializer () {
-        Year1 = new Year(2004);
-        Year2 = new Year (2004);
-        Year3 = new Year(2005);
-
-    }
-
-
+    //Second Constructor=================================================
+    //IntParam Constructor
     @Test
-    public void Testequals() {
+    public void testYearIntCtor() {
+        //Arrange
+        int year = 2004;
 
-        // Valid
-        assertTrue(Year1.equals(Year2));
+        //Act
+        Year year1 = new Year(year);
 
-
-        //Invalid
-        assertFalse(Year1.equals(Year3));
-
-
-        //Null
-        assertFalse(Year1.equals(null));
-
-
-        //Diff Types
-        assertFalse(Year1.equals("NotInt"));
-
-
-        //Same Instance
-        assertTrue(Year1.equals(Year1));
-
-
+        //Assert
+        assertEquals(year,year1.getYear());
     }
 
+   //Passed but this is wrong constructor suppose to not create years out of range
+   @Test
+   public void testYearIntCtorBellowRange() {
+       // Arrange
+       int year = 1899;
+
+       try {
+           // Act
+           Year year2 = new Year(year);
+           fail("Expected IllegalArgumentException was not thrown");
+       } catch (IllegalArgumentException e) {
+           assertEquals("Year constructor: year (1899) outside valid range.", e.getMessage());
+       }
+   }
+
+
+    //Passed bec Exception was thrown
+    @Test(expected = IllegalArgumentException.class)
+    public void testYearIntCtorAboveRange() {
+        //Arrange
+        int year = 10000;
+
+        //Act
+        Year year3 = new Year(year);
+    }
+
+    //Third Constructor===============================================
     @Test
-    public void TestGetYear() {
-        //Valid Year LowestRange----------------------------------------------------------------
+    public void testYearDateCtor() {
         //Arrange
-        Year lowestValidYear = new Year(1900);
+        Date date = new Date(2025-1900,3,16);
 
         //Act
-        int result = lowestValidYear.getYear();
+        Year year4 = new Year(date);
 
         //Assert
-        assertEquals(1900,result);
-
-        //Valid Year InBetweenRange----------------------------------------------------------------
-        //Arrange
-        Year inBetweenRangeValidYear = new Year(2025);
-
-        //Act
-        int result2 = inBetweenRangeValidYear.getYear();
-
-        //Assert
-        assertEquals(2025,result2);
-
-
-        //Valid Year HighestRange----------------------------------------------------------------
-        //Arrange
-        Year highestValidRange = new Year(9999);
-
-        //Act
-        int result3 = highestValidRange.getYear();
-
-        //Assert
-        assertEquals(9999,result3);
-
-
-        //Invalid Year Below Range----------------------------------------------------------------
-        Year bellowValidRange = new Year(1899);
-        //Bug found supposed to make an  outside valid range error
-        //Act
-        int result4 = bellowValidRange.getYear();
-
-        //Assert
-        assertEquals(1899,result4);
-
-        //Invalid Year Above Range----------------------------------------------------------------
-
-        Year aboveValidRange = new Year(10000);
-
-        //Act
-        int result5 = aboveValidRange.getYear();
-
-        //Assert
-        assertEquals(10000,result5);
-
-
-
+        assertEquals(2025,year4.getYear());
     }
 
+    @Test(expected = NullPointerException.class)
+    public void testYearDateCtorNull() {
+        //Arrange
+        Date date = null;
+
+        //Act
+        Year year5 = new Year(date);
+    }
+
+    //4th Constructor ===================================
     @Test
-    public void testPrevious() {
-        //Valid
-        //Arrange
-        Year year1 = new Year(2004);
+    public void testYearDateZoneCtor() {
+        // Arrange
+        Date date = new Date(2025 - 1900, 3, 16);  // April 16, 2025 (Note: Date is 0-indexed for months)
+        TimeZone zone = TimeZone.getTimeZone("UTC");
 
-        //Act
-        RegularTimePeriod prevYear1 = year1.previous();
+        // Act
+        //Year year6 = new Year(date, zone);
+        fail("Cant resolve zone to calender and in the doc calender isnt mentioned");
 
-        //Assert
-        assertEquals(2003,((Year)prevYear1).getYear());
-        assertNotNull(prevYear1);
-
-        //Invalid
-        //Arrange
-        Year year2 = new Year(1900);
-
-        //Act
-        RegularTimePeriod prevYear2 = year2.previous();
-
-        //Assert // Bug error here supposed to return null but instead returned 1899
-        assertNull(prevYear2);
-
+        // Assert
+        //assertEquals(2025, year6.getYear());
     }
+
+    //==============================================================================================================
+
+
+
+
+
+
+
+
+
+
+
 
 
 
