@@ -202,10 +202,44 @@ public class YearTest {
         assertNull(nextYear9999);
     }
 
+    //==============================================================================================================
+    //getSerialIndex=================================================================================================
 
+    @Test
+    public void testGetSerialIndexInRange() {
+        //Arrange
+        Year year2004 = new Year(2004);
 
+        //Act
+        long year2004Index = year2004.getSerialIndex();
 
+        //Assert
+        assertEquals(2004L,year2004Index);
+    }
 
+    @Test
+    public void testGetSerialIndexLowest() {
+        //Arrange
+        Year year1900 = new Year(1900);
+
+        //Act
+        long year1900Index = year1900.getSerialIndex();
+
+        //Assert
+        assertEquals(1900L,year1900Index);
+    }
+
+    @Test
+    public void testGetSerialIndexHighest() {
+        //Arrange
+        Year year9999 = new Year(9999);
+
+        //Act
+        long year9999Index = year9999.getSerialIndex();
+
+        //Assert
+        assertEquals(9999L, year9999Index);
+    }
 
 
 
