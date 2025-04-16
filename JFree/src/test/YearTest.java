@@ -6,6 +6,7 @@ import org.jfree.data.time.Year;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
@@ -241,8 +242,113 @@ public class YearTest {
         assertEquals(9999L, year9999Index);
     }
 
+    //==============================================================================================================
+    //getFirstMillisecond===========================================================================================
 
+    @Test
+    public void testGetFirstMilliSecondValid() {
+        //Arrange
+        Year year = new Year(2004);
+        Calendar calendar = Calendar.getInstance();
 
+        calendar.set(2004,Calendar.JANUARY,1,0,0,0);
+        calendar.set(Calendar.MILLISECOND,0);
+        long expectedTimeInMills = calendar.getTimeInMillis();
+
+        //Act
+        long actualTimeInMills = year.getFirstMillisecond(calendar);
+
+        //Assert
+        assertEquals(actualTimeInMills, expectedTimeInMills);
+
+    }
+
+    @Test
+    public void testGetFirstMillisecondLowestValue() {
+        // Arrange
+        Year year = new Year(1900);
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(1900, Calendar.JANUARY, 1, 0, 0, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        long expectedTimeInMills = calendar.getTimeInMillis();
+
+        // Act
+        long actualTimeInMills = year.getFirstMillisecond(calendar);
+
+        // Assert
+        assertEquals(expectedTimeInMills, actualTimeInMills);
+    }
+
+    @Test
+    public void testGetFirstMillisecondHighestYear() {
+        // Arrange
+        Year year = new Year(9999);
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(9999, Calendar.JANUARY, 1, 0, 0, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        long expectedTimeInMills = calendar.getTimeInMillis();
+
+        // Act
+        long actualTimeInMills = year.getFirstMillisecond(calendar);
+
+        // Assert
+        assertEquals(expectedTimeInMills, actualTimeInMills);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testGetFirstMillisecondWithNullCalendar() {
+        // Arrange
+        Year year = new Year(2025);
+
+        // Act
+        year.getFirstMillisecond(null);
+
+        // Assert
+        // Exception expected
+    }
+
+    //==============================================================================================================
+    //equals========================================================================================================
+
+    @Test
+    public void testEqualSameYear() {
+        //Arrange
+        Year year1 = new Year(2004);
+        Year year2  = new Year(2004);
+
+        //Act-Assert
+        assertTrue(year1.equals(year2));
+
+    }
+
+    @Test
+    public void testEqualDifferentYear() {
+        //Arrange
+        Year year1 = new Year(2004);
+        Year year2  = new Year(2005);
+
+        //Act-Assert
+        assertFalse(year1.equals(year2));
+    }
+
+    @Test
+    public void testEqualNull() {
+        //Arrange
+        Year year1 = new Year(2004);
+
+        //Act-Assert
+        assertFalse(year1.equals(null));
+    }
+
+    @Test
+    public void testEqualDifferentObject() {
+        //Arrange
+        Year year1 = new Year(2004);
+        String year2  = "2004";
+
+        //Acr-Assert
+        assertFalse(year1.equals(year2));
+    }
 
 
 }
