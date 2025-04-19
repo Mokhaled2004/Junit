@@ -391,7 +391,6 @@ public class YearTest {
         //Acr-Assert
         assertFalse(year1.equals(year2));
     }
-    //==============================================================================================================
 
     //===============================================================================================================
     //hashcode=======================================================================================================
@@ -448,6 +447,17 @@ public class YearTest {
     public void testHashCodeOnNullObject() {
         Year year = null;
         year.hashCode();
+    }
+
+
+    //bug as expected 2552 actual 2654
+    @Test
+    public void testHashCodeCalculation() {
+        Year year = new Year(2025);
+
+       //based on the link
+        int expectedHashCode = 17 * 31 + 2025;
+        assertEquals(expectedHashCode, year.hashCode());
     }
     //==============================================================================================================
 
