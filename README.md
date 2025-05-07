@@ -1,65 +1,58 @@
 # 🧪 Software Testing Repository
 
-Welcome to the **Software Testing** repository! This project showcases automated testing strategies using three powerful tools:
+Welcome to the **Software Testing** repository!  
+This project demonstrates **automated testing techniques** using:
 
-- **JUnit** for Java unit testing 🧬  
-- **Robot Framework** for keyword-driven acceptance testing 🤖  
-- **Postman** for RESTful API testing 📮
+- **JUnit** – Java Unit Testing 🧬  
+- **Robot Framework** – Keyword-Driven Testing 🤖  
+- **Postman** – REST API Testing 📮
 
 ---
 
-## 🧬 1. JUnit
+## 🧬 Java Testing — JUnit
 
-### 🔹 Description
-This directory contains unit tests for Java applications using **JUnit 5**.
+### 🔹 Overview
+This module covers unit testing for Java applications using **JUnit 5** (Jupiter).
 
 ### 🛠️ Tech Stack
 - Java 17+
-- JUnit 5 (Jupiter)
-- Maven / Gradle
+- JUnit 5
+- Maven or Gradle
 
-### 🚀 How to Run
+### 🚀 Running the Tests
 ```bash
 cd JUnit
 mvn test
 # or
 ./gradlew test
 
-
-🤖 2. Robot Framework
-🔹 Description
-Contains automated acceptance and functional tests written using Robot Framework syntax.
+🤖 Acceptance Testing — Robot Framework
+🔹 Overview
+This module features functional and acceptance testing via Robot Framework.
 
 🛠️ Tech Stack
 Python 3.10+
 
 Robot Framework
 
-SeleniumLibrary (for UI testing)
+SeleniumLibrary (for UI-based tests)
 
-🚀 How to Run
+🚀 Running the Tests
 
 cd Robot-Framework
 robot tests/
-📮 3. Postman
-🔹 Description
-Includes Postman collections, environments, and test scripts for RESTful API testing.
 
-🛠️ Tools
-Postman App
 
-Newman (CLI tool for Postman)
+📮 API Testing — Postman
+🔹 Overview
+This module includes Postman collections, environments, and scripts to test REST APIs.
 
-🚀 How to Run
+🛠️ Tools Required
+Postman App (for development)
+
+Newman CLI (for automation)
+
+🚀 Running API Tests via Newman
 
 cd Postman
-newman run your-collection.json -e your-environment.json
-
-
-🧠 Goals
-✅ Learn and apply different testing strategies
-
-✅ Maintain a clean testing structure
-
-✅ Improve test automation across unit, integration, and system levels
-
+newman run LMS-API-Collection.json -e LMS-Environment.json
