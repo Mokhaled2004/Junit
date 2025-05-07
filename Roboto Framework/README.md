@@ -1,65 +1,95 @@
-# 🧪 Software Testing Repository
+# 🤖 AliExpress Testing Suite — Robot Framework + Selenium
 
-Welcome to the **Software Testing** repository! This project showcases automated testing strategies using three powerful tools:
+Welcome to the **AliExpress Functional Test Suite** powered by **Robot Framework** and **SeleniumLibrary**.
 
-- **JUnit** for Java unit testing 🧬  
-- **Robot Framework** for keyword-driven acceptance testing 🤖  
-- **Postman** for RESTful API testing 📮
+This test suite validates key functionalities of the [AliExpress](https://www.aliexpress.com/) homepage and product workflows including search, filter, cart operations, login, language settings, and more.
 
 ---
 
-## 🧬 1. JUnit
+## 🔧 Tech Stack
 
-### 🔹 Description
-This directory contains unit tests for Java applications using **JUnit 5**.
+- ✅ **Robot Framework**
+- ✅ **SeleniumLibrary**
+- ✅ **Python 3.10+**
+- ✅ **ChromeDriver / WebDriver Manager**
 
-### 🛠️ Tech Stack
-- Java 17+
-- JUnit 5 (Jupiter)
-- Maven / Gradle
+---
 
-### 🚀 How to Run
+## 🚀 How to Run
+
 ```bash
-cd JUnit
-mvn test
-# or
-./gradlew test
+cd AliExpress-TestSuite
+robot TestSuite.robot
 
+💡 Ensure Chrome and ChromeDriver are properly installed or use WebDriver Manager to auto-download drivers.
 
-🤖 2. Robot Framework
-🔹 Description
-Contains automated acceptance and functional tests written using Robot Framework syntax.
+🧪 Test Scenarios
+🟢 Scenario 1: Product Search Functionality
+Given the user is on the homepage
 
-🛠️ Tech Stack
-Python 3.10+
+When the user searches for "smart watch"
 
-Robot Framework
+And clicks the search button
 
-SeleniumLibrary (for UI testing)
+Then relevant product results should appear
 
-🚀 How to Run
+🟡 Scenario 2: Filter by Category
+Search for a product (e.g., "smart watch")
 
-cd Robot-Framework
-robot tests/
-📮 3. Postman
-🔹 Description
-Includes Postman collections, environments, and test scripts for RESTful API testing.
+Click search
 
-🛠️ Tools
-Postman App
+Apply a filter (e.g., price range 580 - 1249)
 
-Newman (CLI tool for Postman)
+Results should update to reflect the applied filter
 
-🚀 How to Run
+Filter section should visually reflect the selection
 
-cd Postman
-newman run your-collection.json -e your-environment.json
+🛒 Scenario 3: Add Item to Cart
+Search for a product
 
+Click on a product from the results
 
-🧠 Goals
-✅ Learn and apply different testing strategies
+Click "Add to Cart" on the product page
 
-✅ Maintain a clean testing structure
+Cart icon should reflect item addition
 
-✅ Improve test automation across unit, integration, and system levels
+Navigate to cart page and confirm the item is listed
 
+🌐 Scenario 4: Change Website Language
+Open language settings
+
+Select a different language (e.g., Arabic)
+
+Verify the UI reflects the selected language
+
+🔐 Scenario 5: User Login
+Click "Sign In" on homepage
+
+Enter valid credentials
+
+Submit login
+
+Should redirect to user dashboard
+
+Welcome message or user-specific info should be visible
+
+💰 Scenario 6: Change Currency
+Open currency selector in top bar
+
+Choose different currency (e.g., USD)
+
+Product prices should update across site
+
+✨ Bonus: Scenario 7 - Product Image Zoom
+On a product page
+
+Hover over or click the product image
+
+Image should zoom or open in lightbox/zoom view
+
+✈️ Bonus: Scenario 8 - Change Shipping Destination
+Open shipping location selector (top bar)
+
+Select different country (e.g., UAE instead of Egypt)
+
+Shipping details and prices should reflect new country
