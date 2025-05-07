@@ -8,19 +8,6 @@ Welcome to the **Software Testing** repository! This project showcases automated
 
 ---
 
-## 📁 Repository Structure
-
-Software-Testing/
-├── JUnit/
-│ └── 📌 Java-based unit tests using JUnit 5
-├── Robot-Framework/
-│ └── ⚙️ Acceptance tests written in Robot syntax
-└── Postman/
-└── 🔁 Collections and environments for API testing
-
-
----
-
 ## 🧬 1. JUnit
 
 ### 🔹 Description
@@ -37,6 +24,7 @@ cd JUnit
 mvn test
 # or
 ./gradlew test
+
 
 🤖 2. Robot Framework
 🔹 Description
