@@ -71,7 +71,7 @@ public class DiscountCalculatorTest {
 
         //Arrange
         Calendar calendar = Calendar.getInstance();
-        calendar.set(2025, Calendar.OCTOBER, 3);
+        calendar.set(2025, Calendar.OCTOBER, 11);
         Date date = calendar.getTime();
         Week week = new Week(date);
         IDiscountCalculator calculator = new DiscountCalculator(week);
